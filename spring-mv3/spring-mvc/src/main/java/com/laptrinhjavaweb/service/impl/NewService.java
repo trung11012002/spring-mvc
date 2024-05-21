@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Conventions;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.laptrinhjavaweb.converter.CategoryConverter;
 import com.laptrinhjavaweb.converter.NewConverter;
-import com.laptrinhjavaweb.dto.CategoryDTO;
 import com.laptrinhjavaweb.dto.NewDTO;
 import com.laptrinhjavaweb.entity.CategoryEntity;
 import com.laptrinhjavaweb.entity.NewEntity;
@@ -27,6 +25,8 @@ public class NewService implements INewService {
 	private NewRepository newRepository;
 	@Autowired
 	private NewConverter newConverter;
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	@Override
 	public List<NewDTO> findAll(Pageable pageable) {
@@ -51,4 +51,40 @@ public class NewService implements INewService {
 		NewEntity entity = newRepository.findOne(id);
 		return newConverter.toDto(entity);
 	}
+
+	@Override
+	@Transactional
+	public NewDTO insert(NewDTO newDto) {
+		CategoryEntity categoryEntity = categoryRepository.findOneByCode(newDto.getCategoryCode());
+		NewEntity newEntity = newConverter.toEntity(newDto);
+		newEntity.setCategory(categoryEntity);
+		newEntity = newRepository.save(newEntity);
+		return newConverter.toDto(newEntity);
+	}
+
+	@Override
+	@Transactional
+	public NewDTO update(NewDTO dto) {
+		CategoryEntity categoryEntity = categoryRepository.findOneByCode(dto.getCategoryCode());
+		NewEntity oldNew = newRepository.findOne(dto.getId());
+		NewEntity updateNew = newConverter.toEntity(oldNew,dto);
+		updateNew.setCategory(categoryEntity);
+		return newConverter.toDto(newRepository.save(updateNew));
+	}
+	@Override
+	@Transactional
+	public NewDTO save(NewDTO dto) {
+		CategoryEntity categoryEntity = categoryRepository.findOneByCode(dto.getCategoryCode());
+		NewEntity newEntity = new NewEntity();
+		if(dto.getId() != null) {
+			NewEntity oldNew = newRepository.findOne(dto.getId());
+			oldNew.setCategory(categoryEntity);
+			newEntity = newConverter.toEntity(oldNew,dto);
+		}else {
+			newEntity = newConverter.toEntity(dto);
+			newEntity.setCategory(categoryEntity);
+		}
+		return newConverter.toDto(newRepository.save(newEntity));
+	}
+
 }

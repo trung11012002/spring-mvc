@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-import com.laptrinhjavaweb.dto.CategoryDTO;
 import com.laptrinhjavaweb.dto.NewDTO;
 
 public interface INewService {
 	List<NewDTO> findAll(Pageable pageable);
 	int getTotalItem();
 	NewDTO finById(long id);
-	
+	NewDTO insert(NewDTO dto);
+	NewDTO update(NewDTO dto);
+	NewDTO save(NewDTO dto);
 }

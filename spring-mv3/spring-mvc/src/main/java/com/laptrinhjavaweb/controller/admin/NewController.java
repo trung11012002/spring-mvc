@@ -28,7 +28,7 @@ public class NewController {
 		Pageable pageable = new PageRequest(page-1, limit);
 		model.setListResult(newService.findAll(pageable));
 		model.setTotalItem(newService.getTotalItem());
-		model.setTotalPage((int)Math.ceil(model.getTotalItem()/model.getLimit()));
+		model.setTotalPage((int)Math.ceil((float)model.getTotalItem()/model.getLimit()));
 		mav.addObject("model", model);
 		return mav;
 	}
