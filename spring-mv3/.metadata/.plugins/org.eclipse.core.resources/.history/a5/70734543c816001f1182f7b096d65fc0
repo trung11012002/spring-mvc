@@ -1,0 +1,7 @@
+package com.laptrinhjavaweb.converter;
+
+public class CategoryConverter {
+	public CategoryDTO toDto() {
+		
+	}
+}

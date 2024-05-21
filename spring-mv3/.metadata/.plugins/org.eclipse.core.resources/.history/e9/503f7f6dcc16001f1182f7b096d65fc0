@@ -1,0 +1,28 @@
+package com.laptrinhjavaweb.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.laptrinhjavaweb.dto.CategoryDTO;
+import com.laptrinhjavaweb.entity.CategoryEntity;
+import com.laptrinhjavaweb.repository.CategoryRepository;
+
+@Service
+public class CategoryService {
+	@Autowired
+	private CategoryRepository categoryRepository;
+
+	@Override
+	public List<CategoryDTO> findAll() {
+		// TODO Auto-generated method stub
+		List<CategoryEntity> entitys = categoryRepository.findAll();
+		List<CategoryDTO> result = new ArrayList<>();
+		for(CategoryEntity item : entitys) {
+			result.add(categoryConverter.toDto(item));
+		}
+		return result;
+	}
+}

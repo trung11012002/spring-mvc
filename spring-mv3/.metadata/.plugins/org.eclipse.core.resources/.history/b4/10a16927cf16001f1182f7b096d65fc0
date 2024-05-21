@@ -1,0 +1,30 @@
+package com.laptrinhjavaweb.service.impl;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.laptrinhjavaweb.converter.CategoryConverter;
+import com.laptrinhjavaweb.repository.CategoryRepository;
+import com.laptrinhjavaweb.service.ICategoryService;
+
+@Service
+public class CategoryService implements ICategoryService{
+	@Autowired
+	private CategoryRepository categoryRepository;
+	@Autowired
+	CategoryConverter categoryConverter;
+
+	@Override
+	public Map<String,String> findAll() {
+		// TODO Auto-generated method stub
+		Map<String,String> result = new HashMap()<>;
+		List<CategoryEntity> entitys = categoryRepository.findAll();
+		List<CategoryDTO> result = new ArrayList<>();
+		for(CategoryEntity item : entitys) {
+			result.add(categoryConverter.toDto(item));
+		}
+		return result;
+	}
+}
