@@ -1,0 +1,10 @@
+package com.laptrinhjavaweb.util;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class MessageUtil {
+	public Map<String, String> getMessage(String message){
+		
+	}
+}
