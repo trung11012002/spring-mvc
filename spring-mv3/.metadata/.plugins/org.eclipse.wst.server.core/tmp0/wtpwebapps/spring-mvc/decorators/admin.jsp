@@ -15,7 +15,16 @@
     <script src="<c:url value='/template/admin/assets/js/jquery.2.1.1.min.js' />"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        
+    
+    <!-- sweetalert -->
+    <%-- <script src="<c:url value='/template/admin/sweetalert/sweetalert2.min.js' />"></script>
+    <link rel="stylesheet" href="<c:url value='/template/admin/sweetalert/sweetalert2.min.css' />" /> --%>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>  
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link> -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+    
 </head>
 <body class="no-skin">
 	<!-- header -->

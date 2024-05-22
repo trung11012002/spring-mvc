@@ -1,0 +1,10 @@
+package com.laptrinhjavaweb.dto;
+
+import javax.persistence.Column;
+
+public class RoleDTO {
+	@Column(name = "name")
+	private String name;
+	@Column(name = "code")
+	private String code;
+}

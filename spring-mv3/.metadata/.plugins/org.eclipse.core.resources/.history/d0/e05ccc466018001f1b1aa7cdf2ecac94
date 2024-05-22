@@ -1,0 +1,15 @@
+package com.laptrinhjavaweb.dto;
+
+import javax.persistence.Column;
+
+public class UserDTO {
+
+	@Column(name = "username")
+	private String userName;
+	@Column(name = "password")
+	private String password;
+	@Column(name = "fullname")
+	private String fullname;
+	@Column(name = "status")
+	private Integer status;
+}
