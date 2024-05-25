@@ -10,6 +10,7 @@
 		<list key="findhistory">
 			<item value="pagination"/>
 			<item value="formSubmit"/>
+			<item value="warningBeforeDelete"/>
 		</list>
 		<list key="replacehistory">
 		</list>

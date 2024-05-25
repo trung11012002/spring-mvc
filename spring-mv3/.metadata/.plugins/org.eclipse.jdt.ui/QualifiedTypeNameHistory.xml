@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.mysql.cj.jdbc.exceptions.PacketTooBigException"/>
-<fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.entity.NewEntity"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.converter.NewConverter"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.repository.CategoryRepository"/>
@@ -18,7 +16,6 @@
 <fullyQualifiedTypeName name="org.springframework.data.domain.Sort"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.util.MessageUtil"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.service.IUserService"/>
@@ -28,6 +25,15 @@
 <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.converter.RoleConverter"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.converter.UserConverter"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
+<fullyQualifiedTypeName name="org.hibernate.annotations.Parameter"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.laptrinhjavaweb.dto.UserDTO"/>
+<fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.omg.CORBA.PRIVATE_MEMBER"/>
+<fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
+<fullyQualifiedTypeName name="java.awt.print.Pageable"/>
+<fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 </qualifiedTypeNameHistroy>

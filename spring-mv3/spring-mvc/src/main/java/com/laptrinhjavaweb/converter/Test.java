@@ -1,0 +1,18 @@
+package com.laptrinhjavaweb.converter;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public class Test {
+	public static void main(String[] args) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPassword = encoder.encode("123456");
+		System.out.println(encodedPassword);
+		encodedPassword = encoder.encode(encodedPassword);
+		System.out.println(encodedPassword);
+
+		 // Kiểm tra mật khẩu đã mã hóa
+        String inputPassword = "123456";
+        boolean isPasswordMatch = encoder.matches(inputPassword, encodedPassword);
+        System.out.println("Password matches: " + isPasswordMatch);
+	}
+}

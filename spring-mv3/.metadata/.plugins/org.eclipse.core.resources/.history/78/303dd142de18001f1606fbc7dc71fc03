@@ -1,0 +1,33 @@
+package com.laptrinhjavaweb.converter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+
+import com.laptrinhjavaweb.dto.RoleDTO;
+import com.laptrinhjavaweb.dto.UserDTO;
+import com.laptrinhjavaweb.entity.RoleEntity;
+import com.laptrinhjavaweb.entity.UserEntity;
+
+@Component
+public class UserConverter {
+	@Autowired
+	RoleConverter roleConverter;
+	public UserDTO toDto(UserEntity entity) {
+		UserDTO dto = new UserDTO();
+		dto.setId(entity.getId());
+		dto.setUserName(entity.getFullname());
+		dto.setPassword(entity.getPassword());
+		dto.setFullname(entity.getFullname());
+		dto.setStatus(entity.getStatus());
+		List<String> listRole = new ArrayList<>();
+		for(RoleEntity item : entity.getRoles()) {
+			listRole.add(item.getCode());
+		}
+		dto.setRoles(listRole);
+		return dto;
+	}
+}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.laptrinhjavaweb.dto.RoleDTO;
@@ -18,15 +19,32 @@ public class UserConverter {
 	public UserDTO toDto(UserEntity entity) {
 		UserDTO dto = new UserDTO();
 		dto.setId(entity.getId());
-		dto.setUserName(entity.getFullname());
+		dto.setUserName(entity.getUserName());
 		dto.setPassword(entity.getPassword());
 		dto.setFullname(entity.getFullname());
 		dto.setStatus(entity.getStatus());
-		List<RoleDTO> listRole = new ArrayList<>();
+		List<String> listRole = new ArrayList<>();
 		for(RoleEntity item : entity.getRoles()) {
-			roleConverter.toDto(item);
+			listRole.add(item.getCode());
 		}
 		dto.setRoles(listRole);
 		return dto;
+	}
+	//add
+	public UserEntity toEntity(UserDTO dto) {
+		UserEntity entity = new UserEntity();
+		entity.setUserName(dto.getUserName());
+		entity.setPassword(dto.getPassword());
+		entity.setStatus(1);
+		entity.setFullname(dto.getFullname());
+		return entity;
+	}
+	//update
+	public UserEntity toEntity(UserDTO dto ,UserEntity entity) {
+		entity.setUserName(dto.getUserName());
+		entity.setPassword(dto.getPassword());
+		entity.setStatus(1);
+		entity.setFullname(dto.getFullname());
+		return entity;
 	}
 }

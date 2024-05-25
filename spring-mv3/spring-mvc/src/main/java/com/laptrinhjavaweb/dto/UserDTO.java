@@ -7,7 +7,7 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	private String password;
 	private String fullname;
 	private Integer status;
-	private List<RoleDTO> roles;
+	private List<String> roles;
 	public String getUserName() {
 		return userName;
 	}
@@ -32,13 +32,12 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public List<RoleDTO> getRoles() {
+	public List<String> getRoles() {
 		return roles;
 	}
-	public void setRoles(List<RoleDTO> roles) {
+	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
-	
 	
 	
 }

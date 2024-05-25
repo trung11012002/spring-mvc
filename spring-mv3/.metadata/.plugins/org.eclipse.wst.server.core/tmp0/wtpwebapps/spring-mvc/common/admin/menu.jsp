@@ -64,7 +64,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li>
-                    <a href="<c:url value='/quan-tri/nguoi-dung/danh-sach'/>">
+                    <a href="<c:url value='/quan-tri/nguoi-dung/danh-sach?page=1&limit=2'/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         DS người dùng
                     </a>

@@ -2,19 +2,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <c:url var="newAPI" value="/api/new" />
-<c:url var="newURL" value="/quan-tri/bai-viet/danh-sach" />
-
+<c:url var="userURL" value="/quan-tri/nguoi-dung/danh-sach" />
+<c:url var="deleteUserURL" value="/quan-tri/nguoi-dung/xoa" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Danh sách bài viết</title>
+<title>Danh sách người dùng</title>
+
 </head>
 
 <body>
 	<div class="main-content">
-		<form action="<c:url value='/quan-tri/bai-viet/danh-sach'/>"
+		<form action="<c:url value='/quan-tri/nguoi-dung/danh-sach'/>"
 			id="formSubmit" method="get">
 			<div class="main-content-inner">
 				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -34,12 +35,12 @@
 								<div class="table-btn-controls">
 									<div class="pull-right tableTools-container">
 										<div class="dt-buttons btn-overlap btn-group">
-											<c:url var="createNewURL"
-												value="/quan-tri/bai-viet/chinh-sua" />
+											<c:url var="createUserURL"
+												value="/quan-tri/nguoi-dung/them-moi" />
 											<a flag="info"
 												class="dt-button buttons-colvis btn btn-white btn-primary btn-bold"
-												data-toggle="tooltip" title='Thêm bài viết'
-												href='${createNewURL}'> <span> <i
+												data-toggle="tooltip" title='Thêm người dùng'
+												href='${createUserURL}'> <span> <i
 													class="fa fa-plus-circle bigger-110 purple"></i>
 											</span>
 											</a>
@@ -70,19 +71,19 @@
 											<tbody>
 												<c:forEach var="item" items="${model.listResult}">
 													<tr>
-														<td><input type="checkbox" id="checkbox_" value=""></td>
+														<td><input type="checkbox" id="checkbox_${item.id}"
+															value="${item.id}"></td>
 														<td>${item.userName}</td>
 														<td>${item.password}</td>
 														<td>${item.fullname}</td>
 														<td>${item.status}</td>
-														
-														<td><c:url var="updateNewURL"
-																value="/quan-tri/bai-viet/chinh-sua">
+
+														<td><c:url var="updateUserURL"
+																value="/quan-tri/nguoi-dung/chinh-sua">
 																<c:param name="id" value="${item.id}"></c:param>
-															</c:url> 
-															<a class="btn btn-sm btn-primary btn-edit"
+															</c:url> <a class="btn btn-sm btn-primary btn-edit"
 															data-toggle="tooltip" title="Cập nhật bài viết"
-															href='${updateNewURL}'><i
+															href='${updateUserURL}'><i
 																class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></td>
 													</tr>
 												</c:forEach>
@@ -102,57 +103,73 @@
 	</div>
 	<!-- /.main-content -->
 	<script>
-			var totalPages = ${model.totalPage};
-			var currentPage = ${model.page};
-			$(function () {
-		        window.pagObj = $('#pagination').twbsPagination({
-		            totalPages: totalPages,
-		            visiblePages: 10,
-		            startPage: currentPage,
-		            onPageClick: function (event, page) {
-		            	if (currentPage != page) {
-		            		$('#limit').val(2);
-							$('#page').val(page);
-							$('#formSubmit').submit();
-						}
-		            }
-		        });
-		    });
-			function warningBeforeDelete() {
-			    Swal.fire({
-			        title: "Xác nhận xóa",
-			        text: "Bạn có chắc chắn muốn xóa hay không",
-			        icon: "warning",
-			        showCancelButton: true,
-			        confirmButtonClass: "btn-success",
-			        cancelButtonClass: "btn-danger",
-			        confirmButtonText: "Xác nhận",
-			        cancelButtonText: "Hủy bỏ",
-			    }).then((result) => {
-			        if (result.isConfirmed) {
-			            var ids = $('tbody input[type=checkbox]:checked').map(function () {
-			                return $(this).val();
-			            }).get();
-			            deleteNew(ids);
-			        }
-			    });
-			}
+	function warningBeforeDelete() {
+	    Swal.fire({
+	        title: "Xác nhận xóa",
+	        text: "Bạn có chắc chắn muốn xóa hay không",
+	        icon: "warning",
+	        showCancelButton: true,
+	        confirmButtonClass: "btn-success",
+	        cancelButtonClass: "btn-danger",
+	        confirmButtonText: "Xác nhận",
+	        cancelButtonText: "Hủy bỏ",
+	    }).then((result) => {
+	        if (result.isConfirmed) {
+	           var ids = $('tbody input[type=checkbox]:checked').map(function () {
+	                return $(this).val();
+	            }).get();
+	           	if(ids.length > 0){
+	           		deleteNew(ids);
+	           	}else{
+	           	 Swal.fire({
+	                    icon: 'error',
+	                    title: 'Lỗi',
+	                    text: 'Bạn chưa chọn mục để xóa!'
+	                });
+	           	}
+	            
+	        }
+	    }); 			
+	}
 
-		function deleteNew(data) {
-	        $.ajax({
-	            url: '${newAPI}',
-	            type: 'DELETE',
-	            contentType: 'application/json',
-	            data: JSON.stringify(data),
-	            success: function (result) {
-	                window.location.href = "${newURL}?page=1&limit=2&message=delete_success";
-	            },
-	            error: function (error) {
-	            	window.location.href = "${newURL}?page=1&limit=2&message=error_system";
+	function deleteNew(data) {
+	    // Chuyển đổi mảng số nguyên thành mảng Long
+	    /* var longData = data.map(function(item) {
+	        return parseInt(item, 10); // Chuyển đổi từ string sang số nguyên
+	    });
+ */
+	    $.ajax({
+	        url: '${deleteUserURL}',
+	        type: 'POST',
+	        contentType: 'application/json',
+	        data: JSON.stringify(data), // Truyền dữ liệu dưới dạng JSON với key là "userIds"
+	        success: function (result) {
+	            window.location.href = "${userURL}?page=1&limit=2&message=delete_success";
+ 	        },
+	        error: function (error) {
+            window.location.href = "${userURL}?page=1&limit=2&message=error_system";
+         }
+	    });
+	}
+
+		var totalPages = ${model.totalPage};
+		var currentPage = ${model.page};
+		$(function () {
+	        window.pagObj = $('#pagination').twbsPagination({
+	            totalPages: totalPages,
+	            visiblePages: 10,
+	            startPage: currentPage,
+	            onPageClick: function (event, page) {
+	            	if (currentPage != page) {
+	            		$('#limit').val(2);
+						$('#page').val(page);
+						$('#formSubmit').submit();
+					}
 	            }
 	        });
-	    }
-		</script>
+	    });
+		
+	</script>
 </body>
 
 </html>

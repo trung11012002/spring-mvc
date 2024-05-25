@@ -51,7 +51,7 @@
 									for="form-field-1">Tên bài viết</label>
 								<div class="col-sm-9">
 									<form:input path="title" id="title"
-										cssClass="col-xs-10 col-sm-5" value="${model.title}" />
+										cssClass="col-xs-10 col-sm-5"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -109,7 +109,7 @@
 		</div>
 	</div>
 	<script>
-		$('#btnAddOrUpdateNew').click(function(e) {
+		$('#btnAddOrUpdateNew').click(function(e) {		
 			e.preventDefault();
 			var data = {};
 			var formData = $('#formSubmit').serializeArray();
@@ -117,11 +117,30 @@
 			$.each(formData, function(i, v) {
 				data["" + v.name + ""] = v.value;
 			});
-			var id = $('#newId').val();
-			if (id == "") {
-				addNew(data);
-			} else {
-				updateNew(data);
+			var check = 1;
+			// Kiểm tra xem dữ liệu có trường nào rỗng không
+		    for (var key in data) {
+		        if(key != 'id'){
+		        	if (data.hasOwnProperty(key) && data[key] === "") {
+			            
+			            check = 0;
+			            break; // Dừng việc thêm nếu có trường rỗng
+			        }
+		        }
+		    }
+			if(check == 1){
+				var id = $('#newId').val();
+				if (id == "") {
+					addNew(data);
+				} else {
+					updateNew(data);
+				}		
+			}else{
+				Swal.fire({
+	                icon: 'error',
+	                title: 'Lỗi',
+	                text: 'Bạn phải điền đầy đủ thông tin!'
+	            });
 			}
 		});
 		function addNew(data) {
