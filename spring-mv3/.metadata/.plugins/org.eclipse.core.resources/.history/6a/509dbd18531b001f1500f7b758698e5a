@@ -1,0 +1,70 @@
+package com.laptrinhjavaweb.service.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.laptrinhjavaweb.converter.CategoryConverter;
+import com.laptrinhjavaweb.dto.CategoryDTO;
+import com.laptrinhjavaweb.entity.CategoryEntity;
+import com.laptrinhjavaweb.repository.CategoryRepository;
+import com.laptrinhjavaweb.service.ICategoryService;
+
+@Service
+public class CategoryService implements ICategoryService{
+	@Autowired
+	private CategoryRepository categoryRepository;
+	@Autowired
+	CategoryConverter categoryConverter;
+
+	@Override
+	public Map<String,String> findAll() {
+		// TODO Auto-generated method stub
+		Map<String,String> result = new HashMap<>();
+		List<CategoryEntity> entitys = categoryRepository.findAll();
+		for(CategoryEntity item : entitys) {
+			result.put(item.getCode(),item.getName());
+		}
+		return result;
+	}
+
+	@Override
+	public List<CategoryDTO> findAllList(Pageable pageable) {
+		List<CategoryEntity> entities = categoryRepository.findAll(pageable).getContent();
+		List<CategoryDTO> result = new ArrayList<>();
+		for(CategoryEntity item : entities) {
+			result.add(categoryConverter.toDto(item));
+		}
+		return result;
+	}
+
+	@Override
+	public int getTotalItem() {
+		return (int)categoryRepository.count();
+	}
+
+	@Override
+	public CategoryDTO finById(long id) {
+		return categoryConverter.toDto(categoryRepository.findOne(id));
+	}
+
+	@Override
+	public CategoryDTO save(CategoryDTO categoryDTO) {
+		//update
+		CategoryDTO result;
+		if(categoryDTO.getId() != null) {
+			CategoryEntity oldEntity = categoryRepository.findOne(categoryDTO.getId());
+			categoryRepository.save(categoryConverter.toEntity(categoryDTO, oldEntity));
+		}
+		//add
+		else {
+			categoryRepository.save(categoryConverter.toEntity(categoryDTO));
+		}
+		return ;
+	}
+}

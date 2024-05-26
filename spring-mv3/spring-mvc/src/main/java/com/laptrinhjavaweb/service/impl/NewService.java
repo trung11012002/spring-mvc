@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.laptrinhjavaweb.converter.NewConverter;
 import com.laptrinhjavaweb.dto.NewDTO;
 import com.laptrinhjavaweb.entity.CategoryEntity;
+import com.laptrinhjavaweb.entity.CommentEntity;
 import com.laptrinhjavaweb.entity.NewEntity;
 import com.laptrinhjavaweb.repository.CategoryRepository;
+import com.laptrinhjavaweb.repository.CommentRepository;
 import com.laptrinhjavaweb.repository.NewRepository;
 import com.laptrinhjavaweb.service.INewService;
 
@@ -29,6 +29,8 @@ public class NewService implements INewService {
 	private NewConverter newConverter;
 	@Autowired
 	private CategoryRepository categoryRepository;
+	@Autowired
+	private CommentRepository commentRepository;
 	
 	@Override
 	public List<NewDTO> findAll(Pageable pageable) {
@@ -76,7 +78,7 @@ public class NewService implements INewService {
 	@Override
 	@Transactional
 	public NewDTO save(NewDTO dto) {
-		CategoryEntity categoryEntity = categoryRepository.findOneByCode(dto.getCategoryCode());
+		CategoryEntity categoryEntity = categoryRepository.findOneByCode(dto.getCategoryCode());	
 		NewEntity newEntity = new NewEntity();
 		if(dto.getId() != null) {
 			NewEntity oldNew = newRepository.findOne(dto.getId());

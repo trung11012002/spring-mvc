@@ -4,7 +4,6 @@
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.entity.NewEntity"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.converter.NewConverter"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.repository.CategoryRepository"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.springframework.core.Conventions"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.entity.CategoryEntity"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.dto.CategoryDTO"/>
@@ -17,7 +16,6 @@
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.util.MessageUtil"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.service.IUserService"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.entity.UserEntity"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.repository.UserRepository"/>
@@ -27,13 +25,21 @@
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.converter.UserConverter"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
 <fullyQualifiedTypeName name="org.hibernate.annotations.Parameter"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.laptrinhjavaweb.dto.UserDTO"/>
 <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.PRIVATE_MEMBER"/>
 <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
 <fullyQualifiedTypeName name="java.awt.print.Pageable"/>
 <fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="com.laptrinhjavaweb.service.IRoleService"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="com.laptrinhjavaweb.entity.BaseEntity"/>
+<fullyQualifiedTypeName name="javax.persistence.Table"/>
+<fullyQualifiedTypeName name="com.laptrinhjavaweb.entity.CommentEntity"/>
 </qualifiedTypeNameHistroy>

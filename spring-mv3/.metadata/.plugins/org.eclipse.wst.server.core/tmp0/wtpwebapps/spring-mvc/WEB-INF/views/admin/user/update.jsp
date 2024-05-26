@@ -134,7 +134,7 @@
 							<div class="clearfix form-actions">
 								<div class="col-md-offset-3 col-md-9">
 									<c:if test="${not empty model.id}">
-										<button class="btn btn-info" id="btnUpdate" type="submit">
+										<button class="btn btn-info" id="btnUpdate" type="button">
 											<i class="ace-icon fa fa-check bigger-110"></i> Cập nhật
 											người dùng
 										</button>
@@ -158,7 +158,36 @@
 		</div>
 	</div>
 	<script>
-		
+		$('#btnUpdate').click(function(e) {
+			e.preventDefault();
+			var data = {};
+			var formData = $('#formSubmit').serializeArray();
+			console.log(formData);
+			$.each(formData, function(i, v) {
+				data["" + v.name + ""] = v.value;
+			});
+			var check = 1;
+			// Kiểm tra xem dữ liệu có trường nào rỗng không
+			for ( var key in data) {
+				if (key != 'id') {
+					if (data.hasOwnProperty(key) && data[key] === "") {
+
+						check = 0;
+						break; // Dừng việc thêm nếu có trường rỗng
+					}
+				}
+			}
+
+			if (check == 1) {
+				$('#formSubmit').submit();
+			} else {
+				Swal.fire({
+					icon : 'error',
+					title : 'Lỗi',
+					text : 'Bạn phải điền đầy đủ thông tin!'
+				});
+			}
+		});
 	</script>
 </body>
 </html>

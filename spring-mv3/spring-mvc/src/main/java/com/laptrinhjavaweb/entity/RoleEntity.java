@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -18,7 +19,7 @@ public class RoleEntity extends BaseEntity{
 	@Column(name = "code")
 	private String code;
 	
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "roles" ,fetch = FetchType.LAZY)
     private List<UserEntity> users = new ArrayList<>();
 	
 	public String getName() {

@@ -1,6 +1,5 @@
 <%@include file="/common/taglib.jsp"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <c:url var="newAPI" value="/api/new" />
 <c:url var="newURL" value="/quan-tri/bai-viet/danh-sach" />
 
@@ -127,6 +126,15 @@
 			                return $(this).val();
 			            }).get();
 			            deleteNew(ids);
+			            if(ids.length > 0){
+			           		deleteNew(ids);
+			           	}else{
+			           	 Swal.fire({
+			                    icon: 'error',
+			                    title: 'Lỗi',
+			                    text: 'Bạn chưa chọn mục để xóa!'
+			                });
+			           	}
 			        }
 			    });
 			}

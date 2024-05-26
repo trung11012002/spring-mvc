@@ -1,0 +1,119 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@include file="/common/taglib.jsp"%>
+<c:url var="newURL" value="/quan-tri/bai-viet/danh-sach" />
+<c:url var="editNewURL" value="/quan-tri/bai-viet/chinh-sua" />
+<c:url var="newAPI" value="/api/new" />
+<c:url var="userNew" value="/quan-tri/nguoi-dung/them-moi" />
+
+<html>
+<head>
+<title>Chỉnh sửa bài viết</title>
+</head>
+<body>
+	<div class="main-content">
+		<div class="main-content-inner">
+			<div class="breadcrumbs" id="breadcrumbs">
+				<script type="text/javascript">
+					try {
+						ace.settings.check('breadcrumbs', 'fixed')
+					} catch (e) {
+					}
+				</script>
+
+				<ul class="breadcrumb">
+					<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
+					</li>
+
+					<li><a href="#">Forms</a></li>
+					<li class="active">Form Elements</li>
+				</ul>
+				<!-- /.breadcrumb -->
+			</div>
+			<div class="page-content">
+				<div class="row">
+					<div class="col-xs-12">
+						<c:if test="${not empty message}">
+							<div class="alert alert-${alert}">${message}</div>
+						</c:if>
+						<form:form action="${userNew}" method="POST"
+							class="form-horizontal" role="form" id="formSubmit"
+							modelAttribute="model">
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="form-field-1">Tên</label>
+								<div class="col-sm-9">
+									<form:input path="name" id="userName"
+										cssClass="col-xs-10 col-sm-5" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="form-field-1">Code</label>
+								<div class="col-sm-9">
+									<form:input path="password" id="password"
+										cssClass="col-xs-10 col-sm-5" />
+								</div>
+							</div>						
+							<form:hidden path="id" id="newId" />
+							<div class="clearfix form-actions">
+								<div class="col-md-offset-3 col-md-9">
+									<c:if test="${not empty model.id}">
+										<button class="btn btn-info" id="btnUpdate" type="submit">
+											<i class="ace-icon fa fa-check bigger-110"></i> Cập nhật
+											người dùng
+										</button>
+									</c:if>
+									<c:if test="${empty model.id}">
+										<button class="btn btn-info" type="button" id="btnAdd">
+											<i class="ace-icon fa fa-check bigger-110"></i> Thêm người
+											dùng
+										</button>
+									</c:if>
+									&nbsp; &nbsp; &nbsp;
+									<button class="btn" type="reset">
+										<i class="ace-icon fa fa-undo bigger-110"></i> Hủy
+									</button>
+								</div>
+							</div>
+						</form:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('#btnAdd').click(function(e) {
+			e.preventDefault();
+			var data = {};
+			var formData = $('#formSubmit').serializeArray();
+			console.log(formData);
+			$.each(formData, function(i, v) {
+				data["" + v.name + ""] = v.value;
+			});
+			var check = 1;
+			// Kiểm tra xem dữ liệu có trường nào rỗng không
+		    for (var key in data) {
+		        if(key != 'id'){
+		        	if (data.hasOwnProperty(key) && data[key] === "") {
+			            
+			            check = 0;
+			            break; // Dừng việc thêm nếu có trường rỗng
+			        }
+		        }
+		    }
+			
+			if(check == 1){
+				$('#formSubmit').submit();
+			}else{
+				Swal.fire({
+	                icon: 'error',
+	                title: 'Lỗi',
+	                text: 'Bạn phải điền đầy đủ thông tin!'
+	            });
+			}
+		});
+	</script>
+</body>
+</html>

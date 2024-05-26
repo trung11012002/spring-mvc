@@ -1,0 +1,28 @@
+package com.laptrinhjavaweb.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.security.core.userdetails.User;
+
+@Entity
+@Table(name = "comment")
+public class CommentEntity extends BaseEntity{
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+	private CategoryEntity category;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "news_id")
+    private News new;
+    
+    private String content;
+    
+    // getters and setters
+}

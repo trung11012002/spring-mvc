@@ -76,7 +76,6 @@ public class UserService implements IUserService {
 		else {
 			UserEntity entity = userRepository.findOne(userDTO.getId());
 			entity = userConverter.toEntity(userDTO, entity);
-
 			List<RoleEntity> listRoleEntity = new ArrayList<>();
 			// Thêm các vai trò (roles)
 			if (userDTO.getRoles() != null && !userDTO.getRoles().isEmpty()) {

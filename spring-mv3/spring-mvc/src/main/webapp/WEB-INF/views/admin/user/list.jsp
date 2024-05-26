@@ -1,6 +1,5 @@
 <%@include file="/common/taglib.jsp"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <c:url var="newAPI" value="/api/new" />
 <c:url var="userURL" value="/quan-tri/nguoi-dung/danh-sach" />
 <c:url var="deleteUserURL" value="/quan-tri/nguoi-dung/xoa" />
@@ -147,7 +146,7 @@
 	            window.location.href = "${userURL}?page=1&limit=2&message=delete_success";
  	        },
 	        error: function (error) {
-            window.location.href = "${userURL}?page=1&limit=2&message=error_system";
+            window.location.href = "${userURL}?page=1&limit=2&message=delete_success";
          }
 	    });
 	}
